@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    nothing()
+  })
+
+  const nothing = () => {
+    let a = 2;
+  }
+
   return (
     <div className="App">
       <header className="App-header"><img
