@@ -1,4 +1,19 @@
-const List = ({ list, users }) => {
+import { User } from "screens/project-list/SearchPanel";
+
+interface Project {
+  id: string;
+  name: string;
+  personId: string;
+  pin: boolean;
+  organization: string;
+}
+
+interface ListProps {
+  list: Project[];
+  users: User[];
+}
+
+const List = ({ list, users }: ListProps) => {
   return (
     <table>
       <thead>
