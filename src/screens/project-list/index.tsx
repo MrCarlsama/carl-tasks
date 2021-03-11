@@ -3,6 +3,7 @@ import List from "./List";
 import SearchPanel from "./SearchPanel";
 import * as qs from "qs";
 import { cleanObject, useDebounce, useMount } from "utils";
+import { useHttp } from "utils/http";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -17,22 +18,22 @@ const ProjectListScreen = () => {
 
   const debounceParam = useDebounce(param, 200);
 
+  const client = useHttp();
+
   useEffect(() => {
-    fetch(
-      `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
-    ).then(async (res) => {
-      if (res.ok) {
-        setList(await res.json());
-      }
-    });
+    client("projects", {
+      data: cleanObject(debounceParam),
+    }).then(setList);
   }, [debounceParam]);
 
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (res) => {
-      if (res.ok) {
-        setUsers(await res.json());
-      }
-    });
+    client("users").then(setUsers);
+
+    // fetch(`${apiUrl}/users`).then(async (res) => {
+    //   if (res.ok) {
+    //     setUsers(await res.json());
+    //   }
+    // });
   });
 
   return (
