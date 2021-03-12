@@ -3,6 +3,7 @@ import List from "./List";
 import SearchPanel from "./SearchPanel";
 import { cleanObject, useDebounce, useMount } from "utils";
 import { useHttp } from "utils/http";
+import styled from "@emotion/styled";
 
 const ProjectListScreen = () => {
   const [param, setParam] = useState({
@@ -21,6 +22,7 @@ const ProjectListScreen = () => {
     client("projects", {
       data: cleanObject(debounceParam),
     }).then(setList);
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
   }, [debounceParam]);
 
   useMount(() => {
@@ -34,11 +36,16 @@ const ProjectListScreen = () => {
   });
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel param={param} users={users} setParam={setParam} />
       <List list={list} users={users} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;
 
 export default ProjectListScreen;
