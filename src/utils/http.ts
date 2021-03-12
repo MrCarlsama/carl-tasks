@@ -27,7 +27,6 @@ export const http = async (
   } else {
     config.body = JSON.stringify(data || {});
   }
-  console.log(config);
 
   return window.fetch(`${apiUrl}/${endponit}`, config).then(async (res) => {
     if (res.status === 401) {
