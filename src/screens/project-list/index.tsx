@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import List from "./List";
 import SearchPanel from "./SearchPanel";
-import * as qs from "qs";
 import { cleanObject, useDebounce, useMount } from "utils";
 import { useHttp } from "utils/http";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 const ProjectListScreen = () => {
   const [param, setParam] = useState({
