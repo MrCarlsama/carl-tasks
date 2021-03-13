@@ -1,5 +1,5 @@
 import { useAuth } from "context/authContext";
-import ProjectListScreen from "screens/project-list";
+import { ProjectListScreen } from "screens/project-list";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 // import softworeLogo from "assets/software-logo.svg";

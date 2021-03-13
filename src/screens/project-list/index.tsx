@@ -6,12 +6,12 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/users";
+import { useUrlQueryParam } from "utils/url";
 
-const ProjectListScreen = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+export const ProjectListScreen = () => {
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
+
+  console.log(param);
 
   const debounceParam = useDebounce(param, 200);
 
@@ -33,8 +33,8 @@ const ProjectListScreen = () => {
   );
 };
 
+ProjectListScreen.whyDidYouRender = false;
+
 const Container = styled.div`
   padding: 3.2rem;
 `;
-
-export default ProjectListScreen;
