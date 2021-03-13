@@ -3,7 +3,11 @@ import { Form, Input } from "antd";
 import { LongButton } from "unauthenticatedApp";
 import { useAsync } from "utils/useAsync";
 
-const LoginScreen = ({ onError }: { onError: (error: Error) => void }) => {
+export const LoginScreen = ({
+  onError,
+}: {
+  onError: (error: Error) => void;
+}) => {
   const { login } = useAuth();
 
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
@@ -41,5 +45,3 @@ const LoginScreen = ({ onError }: { onError: (error: Error) => void }) => {
     </Form>
   );
 };
-
-export default LoginScreen;

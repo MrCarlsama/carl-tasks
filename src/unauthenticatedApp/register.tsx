@@ -3,7 +3,11 @@ import { Form, Input } from "antd";
 import { LongButton } from "unauthenticatedApp";
 import { useAsync } from "utils/useAsync";
 
-const RegisterScreen = ({ onError }: { onError: (error: Error) => void }) => {
+export const RegisterScreen = ({
+  onError,
+}: {
+  onError: (error: Error) => void;
+}) => {
   const { register } = useAuth();
 
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
@@ -56,5 +60,3 @@ const RegisterScreen = ({ onError }: { onError: (error: Error) => void }) => {
     </Form>
   );
 };
-
-export default RegisterScreen;

@@ -1,14 +1,14 @@
 import { Button, Card, Divider, Typography } from "antd";
 import { useState } from "react";
-import RegisterScreen from "unauthenticatedApp/register";
-import LoginScreen from "./login";
+import { RegisterScreen } from "unauthenticatedApp/register";
+import { LoginScreen } from "./login";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
 import { useDocumentTitle } from "utils";
 
-const UnauthenticatedApp = () => {
+export const UnauthenticatedApp = () => {
   const [isRegister, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -81,5 +81,3 @@ const ShadowCard = styled(Card)`
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
   text-align: center;
 `;
-
-export default UnauthenticatedApp;

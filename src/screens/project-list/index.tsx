@@ -1,6 +1,6 @@
 import { useState } from "react";
-import List from "./List";
-import SearchPanel from "./SearchPanel";
+import { List } from "./List";
+import { SearchPanel } from "./SearchPanel";
 import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
 import { Typography } from "antd";

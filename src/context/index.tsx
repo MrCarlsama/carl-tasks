@@ -2,7 +2,7 @@ import { AuthProvider } from "context/authContext";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-const AppProviders = ({ children }: { children: ReactNode }) => {
+export const AppProviders = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient();
 
   return (
@@ -11,5 +11,3 @@ const AppProviders = ({ children }: { children: ReactNode }) => {
     </QueryClientProvider>
   );
 };
-
-export default AppProviders;
