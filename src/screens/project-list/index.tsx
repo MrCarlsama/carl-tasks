@@ -6,9 +6,14 @@ import { Button, Row, Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/users";
 import { useProjectsSearchParams } from "./util";
+import { ButtonNoPadding } from "components/lib";
+import { useDispatch } from "react-redux";
+import { projectListActions } from "./projectList.slice";
 
-export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
+export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
+
+  const dispatch = useDispatch();
 
   const [param, setParam] = useProjectsSearchParams();
 
@@ -22,14 +27,18 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
     <Container>
       <Row justify={"space-between"}>
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding
+          onClick={() => dispatch(projectListActions.openProjectModal())}
+          type={"link"}
+        >
+          创建项目
+        </ButtonNoPadding>
       </Row>
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       <SearchPanel param={param} users={users || []} setParam={setParam} />
       <List
-        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         dataSource={list || []}

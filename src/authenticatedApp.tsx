@@ -14,38 +14,15 @@ import { ProjectModal } from "screens/project-list/projectModal";
 import { ProjectPopover } from "components/projectPopover";
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
+  // const [projectModalOpen, setProjectModalOpen] = useState(false);
 
   return (
     <Container>
-      <PageHeader
-        projectButton={
-          <ButtonNoPadding
-            type={"link"}
-            onClick={() => setProjectModalOpen(true)}
-          >
-            创建项目
-          </ButtonNoPadding>
-        }
-      />
+      <PageHeader />
       <Main>
         <Router>
           <Routes>
-            <Route
-              path={"/projects"}
-              element={
-                <ProjectListScreen
-                  projectButton={
-                    <ButtonNoPadding
-                      type={"link"}
-                      onClick={() => setProjectModalOpen(true)}
-                    >
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            ></Route>
+            <Route path={"/projects"} element={<ProjectListScreen />}></Route>
             <Route
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
@@ -54,15 +31,12 @@ export const AuthenticatedApp = () => {
           </Routes>
         </Router>
       </Main>
-      <ProjectModal
-        projectModalOpen={projectModalOpen}
-        onClose={() => setProjectModalOpen(false)}
-      />
+      <ProjectModal />
     </Container>
   );
 };
 
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   const { logout, user } = useAuth();
   return (
     <Header between={true}>
@@ -70,7 +44,7 @@ const PageHeader = (props: { projectButton: JSX.Element }) => {
         <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
         </ButtonNoPadding>
-        <ProjectPopover {...props} />
+        <ProjectPopover />
 
         <span>用户</span>
       </HeaderLeft>

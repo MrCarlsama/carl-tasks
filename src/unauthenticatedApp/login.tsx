@@ -16,6 +16,7 @@ export const LoginScreen = ({
     username: string;
     password: string;
   }) => {
+    // dispatch(loginThunk(values))
     try {
       await run(login(values));
     } catch (e) {
