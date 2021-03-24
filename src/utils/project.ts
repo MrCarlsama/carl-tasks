@@ -1,6 +1,12 @@
 import { useHttp } from "utils/http";
 import { Project } from "screens/project-list/List";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { QueryKey, useMutation, useQuery, useQueryClient } from "react-query";
+import { useProjectsSearchParams } from "screens/project-list/util";
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useEditConfig,
+} from "./useOpimisticOptions";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
@@ -28,8 +34,7 @@ export const useProjects = (param?: Partial<Project>) => {
   );
 };
 
-export const useEditProject = () => {
-  const client = useHttp();
+export const useEditProject = (queryKey: QueryKey) => {
   // const { run, ...asyncResult } = useAsync();
   // const mutate = (params: Partial<Project>) => {
   //   return run(
@@ -43,8 +48,7 @@ export const useEditProject = () => {
   //   mutate,
   //   ...asyncResult,
   // };
-
-  const queryClient = useQueryClient();
+  const client = useHttp();
 
   return useMutation(
     (params: Partial<Project>) =>
@@ -52,15 +56,12 @@ export const useEditProject = () => {
         data: params,
         method: "PATCH",
       }),
-    {
-      onSuccess: () => queryClient.invalidateQueries("projects"),
-    }
+    useEditConfig(queryKey)
   );
 };
 
-export const useAddProject = () => {
+export const useAddProject = (queryKey: QueryKey) => {
   // const { run, ...asyncResult } = useAsync();
-  const client = useHttp();
   // const mutate = (params: Partial<Project>) => {
   //   return run(
   //     client(`projects/${params.id}`, {
@@ -73,18 +74,25 @@ export const useAddProject = () => {
   //   mutate,
   //   ...asyncResult,
   // };
-
-  const queryClient = useQueryClient();
-
+  const client = useHttp();
   return useMutation(
     (params: Partial<Project>) =>
       client(`projects`, {
         data: params,
         method: "POST",
       }),
-    {
-      onSuccess: () => queryClient.invalidateQueries("projects"),
-    }
+    useAddConfig(queryKey)
+  );
+};
+
+export const useDeleteProject = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    ({ id }: { id: number }) =>
+      client(`projects/${id}`, {
+        method: "POST",
+      }),
+    useDeleteConfig(queryKey)
   );
 };
 
