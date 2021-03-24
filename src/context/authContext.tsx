@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import * as auth from "authProvider";
 import { User } from "screens/project-list/SearchPanel";
 import { http } from "utils/http";
@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     error,
     isLoading,
     isIdle,
-    isSuccess,
     isError,
     run,
     setData: setUser,
