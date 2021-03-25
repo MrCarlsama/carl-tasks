@@ -2,7 +2,7 @@ import { cleanObject } from "utils";
 import { useAsync } from "utils/useAsync";
 import { useMount } from "utils";
 import { useHttp } from "utils/http";
-import { User } from "screens/project-list/SearchPanel";
+import { User } from "types/user";
 
 export const useUsers = (param?: Partial<User>) => {
   const client = useHttp();
